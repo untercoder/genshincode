@@ -15,7 +15,10 @@
             <a class="nav-link" href="#">Новости</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Обьявления</a>
+            <a class="nav-link" href="#">Аккаунты</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Услуги</a>
         </li>
     </ul>
 </section>
