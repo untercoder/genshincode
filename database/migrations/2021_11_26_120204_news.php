@@ -13,7 +13,13 @@ class News extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('news', function (Blueprint $table) {
+            $table->id();
+            $table->string('header');
+            $table->string('img_path')->unique();
+            $table->string('body_text');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +29,6 @@ class News extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('news');
     }
 }
