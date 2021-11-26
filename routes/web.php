@@ -23,8 +23,8 @@ Route::get('/about' , [ActualCodesController::class, 'showAbout'] ) -> name('abo
 Route::prefix('dashboard')->middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('promocode', PromocodeController::class);
     Route::resource('users', UserController::class);
-    Route::redirect('/', '/dashboard/promocode')->name('dashboard');
     Route::resource('news', NewsController::class);
+    Route::redirect('/', '/dashboard/promocode')->name('dashboard');
 });
 
 Route::fallback(function () {

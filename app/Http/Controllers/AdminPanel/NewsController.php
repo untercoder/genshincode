@@ -30,11 +30,17 @@ class NewsController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function create()
     {
-        //
+        return view('admin.inputform_news',
+            [
+                'title' => "News admin table",
+                'user' => Auth::user(),
+                'modelName' => "News",
+            ]
+        );
     }
 
     /**
