@@ -38,7 +38,7 @@
                         @method("DELETE")
                         <button  type="submit" class="btn btn-danger">Удалить</button>
                         @if($modelName === "promoCode")<a href="{{route("promocode.edit", $element)}}" type="button" class="btn btn-warning">Редактировать</a>@endif
-                        @if($modelName === "User")<a href="#" type="button" class="btn btn-warning">Редактировать</a>@endif
+{{--                        @if($modelName === "User")<a href="#" type="button" class="btn btn-warning">Редактировать</a>@endif--}}
                     </form>
             </div>
         </td>

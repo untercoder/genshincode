@@ -36,7 +36,12 @@ class PromocodeController extends Controller
      */
     public function create()
     {
-        return view('admin.inputform_promotable', ['title' => "Create promocode", 'user' => Auth::user()]);
+        return view('admin.inputform_promotable', [
+            'title' => "Create promocode",
+            'user' => Auth::user(),
+            'modelName' => "promoCode"
+
+        ]);
     }
 
     /**
@@ -70,8 +75,12 @@ class PromocodeController extends Controller
      */
     public function edit(Promocode $promocode)
     {
-        return view('admin.inputform_promotable', ['title' => "Edit code", 'user' => Auth::user(),
-            'promocode' => $promocode]);
+        return view('admin.inputform_promotable', [
+                'title' => "Edit code",
+                'user' => Auth::user(),
+                'promocode' => $promocode,
+                'modelName' => "promoCode"
+            ]);
     }
 
     /**
