@@ -20,7 +20,7 @@ class UserController extends Controller
     {
         return view('admin.dashboard_table',
             [
-                'title' => "Dashboard",
+                'title' => "User admin table",
                 'user' => Auth::user(),
                 'date' => User::all(),
                 'modelName' => "User",

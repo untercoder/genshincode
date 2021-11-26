@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ActualCodesController;
+use App\Http\Controllers\AdminPanel\NewsController;
 use App\Http\Controllers\AdminPanel\PromocodeController;
 use App\Http\Controllers\AdminPanel\UserController;
 use Illuminate\Support\Facades\Route;
@@ -23,6 +24,7 @@ Route::prefix('dashboard')->middleware(['auth', 'role:admin'])->group(function (
     Route::resource('promocode', PromocodeController::class);
     Route::resource('users', UserController::class);
     Route::redirect('/', '/dashboard/promocode')->name('dashboard');
+    Route::resource('news', NewsController::class);
 });
 
 Route::fallback(function () {

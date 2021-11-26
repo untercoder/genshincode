@@ -13,22 +13,23 @@
     <tbody>
     @foreach($date as $element)
     <tr>
-
-        @if($modelName === "promoCode")
-        <td>{{$element->server}}</td>
-        <td>{{$element->code}}</td>
-        <td>{{$element->prize}}</td>
-        <td>{{$element->date}}</td>
-        @endif
-
-        @if($modelName === "User")
-            <td>{{$element->name}}</td>
-            <td>{{$element->email}}</td>
-            <td>{{$element->created_at}}</td>
-            <td>{{$element->updated_at}}</td>
-        @endif
-
-
+            @if($modelName === "promoCode")
+            <td>{{$element->server}}</td>
+            <td>{{$element->code}}</td>
+            <td>{{$element->prize}}</td>
+            <td>{{$element->date}}</td>
+            @endif
+            @if($modelName === "User")
+                <td>{{$element->name}}</td>
+                <td>{{$element->email}}</td>
+                <td>{{$element->created_at}}</td>
+                <td>{{$element->updated_at}}</td>
+            @endif
+            @if($modelName === "News")
+                <td>{{$element->header}}</td>
+                <td>{{$element->created_at}}</td>
+                <td>{{$element->updated_at}}</td>
+            @endif
         <td>
             <div class="btn-group" role="group" aria-label="Basic outlined example">
                     @if($modelName === "promoCode")<form method="POST" action="{{route("promocode.destroy", $element)}}">@endif

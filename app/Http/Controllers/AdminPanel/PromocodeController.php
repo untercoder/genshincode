@@ -20,7 +20,7 @@ class PromocodeController extends Controller
     {
         return view('admin.dashboard_table',
             [
-                'title' => "Dashboard",
+                'title' => "Admin promocode table",
                 'user' => Auth::user(),
                 'date' => Promocode::all(),
                 'modelName' => "promoCode",

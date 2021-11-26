@@ -12,7 +12,7 @@
             <a class="{{$modelName === "User" ? 'nav-link active' : 'nav-link' }}" href="{{route('users.index')}}">Пользователи</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">Новости</a>
+            <a class="{{$modelName === "News" ? 'nav-link active' : 'nav-link' }}" href="{{route('news.index')}}">Новости</a>
         </li>
         <li class="nav-item">
             <a class="nav-link" href="#">Аккаунты</a>
