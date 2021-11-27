@@ -47,11 +47,19 @@ class NewsController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
-        //
+        $imgPath = $request->file('image')->store('news_img');
+        $params = $request->all();
+        $params['image'] = $imgPath;
+        News::create([
+            'header' => $params['header'],
+            'body_text' => $params['text'],
+            'img_path' => $params['image']
+        ]);
+        return redirect()->route('news.index');
     }
 
     /**
