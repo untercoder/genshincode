@@ -52,14 +52,24 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        $imgPath = $request->file('image')->store('news_img');
+        $file = $request->file('image');
         $params = $request->all();
-        $params['image'] = $imgPath;
-        News::create([
-            'header' => $params['header'],
-            'body_text' => $params['text'],
-            'img_path' => $params['image']
-        ]);
+
+        if(isset($file)) {
+            $imgPath = $file->store('news_img');
+            $params['image'] = $imgPath;
+            News::create([
+                'header' => $params['header'],
+                'body_text' => $params['text'],
+                'img_path' => $params['image']
+            ]);
+        }
+        else {
+            News::create([
+                'header' => $params['header'],
+                'body_text' => $params['text'],
+            ]);
+        }
         return redirect()->route('news.index');
     }
 
@@ -101,14 +111,27 @@ class NewsController extends Controller
      */
     public function update(Request $request, News $news)
     {
-        $imgPath = $request->file('image')->store('news_img');
+        $file = $request->file('image');
         $params = $request->all();
-        $params['image'] = $imgPath;
-        $news->update([
-            'header' => $params['header'],
-            'body_text' => $params['text'],
-            'img_path' => $params['image']
-        ]);
+
+        if(isset($file)) {
+            if(isset($news->img_path)) {
+                Storage::delete($news->img_path);
+            }
+            $imgPath = $file->store('news_img');
+            $params['image'] = $imgPath;
+            $news->update([
+                'header' => $params['header'],
+                'body_text' => $params['text'],
+                'img_path' => $params['image']
+            ]);
+        }
+        else {
+            $news->update([
+                'header' => $params['header'],
+                'body_text' => $params['text'],
+            ]);
+        }
         return redirect()->route('news.index');
     }
 
