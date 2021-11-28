@@ -36,11 +36,15 @@
                 <div class="btn-group" role="group" aria-label="Basic outlined example">
                         @if($modelName === "promoCode")<form method="POST" action="{{route("promocode.destroy", $element)}}">@endif
                         @if($modelName === "User")<form method="POST" action="{{route("users.destroy", $element)}}">@endif
+                        @if($modelName === "News")<form method="POST" action="{{route("news.destroy", $element)}}">@endif
                             @csrf
                             @method("DELETE")
                             <button  type="submit" class="btn btn-danger">Удалить</button>
                             @if($modelName === "promoCode")
                                 <a href="{{route("promocode.edit", $element)}}" type="button" class="btn btn-warning">Редактировать</a>
+                            @endif
+                            @if($modelName === "News")
+                                <a href="{{route('news.edit', $element)}}" type="button" class="btn btn-warning">Редактировать</a>
                             @endif
                         </form>
                 </div>

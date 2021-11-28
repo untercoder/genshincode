@@ -6,6 +6,7 @@ use App\Models\News;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class NewsController extends Controller
 {
@@ -77,11 +78,18 @@ class NewsController extends Controller
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\News  $news
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function edit(News $news)
     {
-        //
+        return view('admin.inputform_news',
+            [
+                'title' => "News admin table",
+                'user' => Auth::user(),
+                'modelName' => "News",
+                'news' => $news
+            ]
+        );
     }
 
     /**
@@ -89,21 +97,31 @@ class NewsController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\News  $news
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, News $news)
     {
-        //
+        $imgPath = $request->file('image')->store('news_img');
+        $params = $request->all();
+        $params['image'] = $imgPath;
+        $news->update([
+            'header' => $params['header'],
+            'body_text' => $params['text'],
+            'img_path' => $params['image']
+        ]);
+        return redirect()->route('news.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\News  $news
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(News $news)
     {
-        //
+        Storage::delete($news->img_path);
+        $news->delete();
+        return redirect()->route('news.index');
     }
 }

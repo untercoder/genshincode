@@ -6,6 +6,12 @@
     @include("components.guest.textpanel")
     @include("components.guest.table")
     @include("components.guest.banner")
+    @include("components.guest.banner")
+    @include("components.guest.banner")
+    @include("components.guest.banner")
+    @include("components.guest.banner")
+    @include("components.guest.banner")
+    @include("components.guest.banner")
 @stop
 
 

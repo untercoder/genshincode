@@ -17,22 +17,26 @@
         height: 100%;
         background: url("{{asset('img/genshin-impact-40.jpg')}}") no-repeat fixed;
     }
-    .section_code {
+    .container{
         height: 100%;
-        padding-left: 15%;
-        padding-right: 15%;
     }
-    .codes_view_container {
+    .row {
         height: 100%;
-        background-color: white;
+    }
+    .col {
+        background: white;
     }
 </style>
 
-<div class="section_code">
-    <div class="codes_view_container">
-    @section('app_body')
-        <!-- Components app from view.component -->
-        @show
+
+
+<div class="container">
+    <div class="row">
+        <div class="col mx-auto">
+            @section('app_body')
+                <!-- Components app from view.component -->
+                @show
+        </div>
     </div>
 </div>
 <!-- Bootstrap JS -->
