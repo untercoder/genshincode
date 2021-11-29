@@ -35,7 +35,7 @@
         <div class="col mx-auto">
             @section('app_body')
                 <!-- Components app from view.component -->
-                @show
+            @show
         </div>
     </div>
 </div>

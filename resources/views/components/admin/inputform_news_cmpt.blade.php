@@ -30,7 +30,7 @@
         @if(isset($news))
             <div class="text-center">
                 <h2>Фото в статье</h2>
-                <img src="{{\Illuminate\Support\Facades\Storage::url($news->img_path)}}" class="img-thumbnail" alt="...">
+                <img width="500" height="500" src="{{\Illuminate\Support\Facades\Storage::url($news->img_path)}}" class="img-thumbnail" alt="...">
             </div>
         @endif
 

@@ -77,11 +77,19 @@ class NewsController extends Controller
      * Display the specified resource.
      *
      * @param  \App\Models\News  $news
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function show(News $news)
     {
-        //
+        return view('new',
+            [
+                'title' => "News admin table",
+                'user' => Auth::user(),
+                'date' => News::all(),
+                'modelName' => "News",
+                'news' => $news
+            ]
+        );
     }
 
     /**

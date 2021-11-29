@@ -28,7 +28,7 @@
                 <td>{{$element->updated_at}}</td>
             @endif
             @if($modelName === "News")
-                <td>{{$element->header}}</td>
+                <td><a href="{{route('news.show', $element)}}">{{$element->header}}</a></td>
                 <td>{{$element->created_at}}</td>
                 <td>{{$element->updated_at}}</td>
             @endif
