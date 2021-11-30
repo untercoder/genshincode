@@ -40,7 +40,7 @@
         </div>
 
         <div class="form-group">
-            <button type="submit" class="btn btn-success">Добавить новость</button>
+            <button type="submit" class="btn btn-success">{{isset($news)? "Редактировать новость" : "Добавить новость"}}</button>
         </div>
 
         <div class="form-group">

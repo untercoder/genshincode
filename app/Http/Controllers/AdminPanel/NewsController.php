@@ -83,7 +83,7 @@ class NewsController extends Controller
     {
         return view('new',
             [
-                'title' => "News admin table",
+                'title' => $news->header,
                 'user' => Auth::user(),
                 'date' => News::all(),
                 'modelName' => "News",

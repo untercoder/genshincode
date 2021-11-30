@@ -17,7 +17,7 @@ class News extends Migration
             $table->id();
             $table->string('header');
             $table->string('img_path')->unique()->nullable();
-            $table->string('body_text');
+            $table->text('body_text');
             $table->timestamps();
         });
     }

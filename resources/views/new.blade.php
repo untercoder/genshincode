@@ -4,4 +4,5 @@
 @endsection
 @section("app_body")
     @include('components.news.header_new')
+    @include('components.news.news_body')
 @stop

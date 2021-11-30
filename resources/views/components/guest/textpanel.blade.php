@@ -1,6 +1,6 @@
 <style>
     .text_panel {
-        padding-top: 8%;
+        padding-top: 70px;
     }
 </style>
 
