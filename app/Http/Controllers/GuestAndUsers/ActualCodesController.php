@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\GuestAndUsers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Promocode;
@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class ActualCodesController extends Controller
 {
 
-    public function showActual(): string
+    public function show(): string
     {
         return view('actualcode',
                 [
@@ -21,15 +21,4 @@ class ActualCodesController extends Controller
                 ]
         );
     }
-
-    public function showAbout() : string {
-        return view('about',
-            [
-                'title' => "About",
-                'user' => Auth::user()
-            ]
-        );
-    }
-
-
 }

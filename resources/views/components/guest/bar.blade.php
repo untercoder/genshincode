@@ -1,6 +1,6 @@
 <nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light ml-auto">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{{route('ActualCodes.show')}}">GENSHINCODE</a>
+        <a class="navbar-brand" href="{{route('actualCodes.show')}}">GENSHINCODE</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -35,7 +35,7 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Новости</a>
+                        <a class="nav-link" href="{{route('gn-news.index')}}">Новости</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Промокоды</a>

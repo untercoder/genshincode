@@ -1,9 +1,12 @@
 <?php
 
-use App\Http\Controllers\ActualCodesController;
+
 use App\Http\Controllers\AdminPanel\NewsController;
 use App\Http\Controllers\AdminPanel\PromocodeController;
 use App\Http\Controllers\AdminPanel\UserController;
+use App\Http\Controllers\GuestAndUsers\ActualCodesController;
+use App\Http\Controllers\GuestAndUsers\GuestNewsController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,8 +20,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/' , [ActualCodesController::class, 'showActual']) -> name('ActualCodes.show');
-Route::get('/about' , [ActualCodesController::class, 'showAbout'] ) -> name('about.show');
+Route::get('/' , [ActualCodesController::class, 'show']) -> name('actualCodes.show');
+Route::get('/about' , function () {return view('about', ['title' => "About", 'user' => Auth::user()]);})
+    -> name('about.show');
+Route::resource('news', GuestNewsController::class)->only([
+    'index', 'show'
+])->names([
+    'index' => 'gn-news.index',
+    'show' => 'gn-news.show'
+]);
 
 Route::prefix('dashboard')->middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('promocode', PromocodeController::class);

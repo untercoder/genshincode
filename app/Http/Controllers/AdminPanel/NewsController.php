@@ -4,12 +4,15 @@ namespace App\Http\Controllers\AdminPanel;
 
 use App\Models\News;
 use App\Http\Controllers\Controller;
+use App\Traits\News\ShowNewsTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class NewsController extends Controller
 {
+    use ShowNewsTrait;
+
     /**
      * Display a listing of the resource.
      *
@@ -71,25 +74,6 @@ class NewsController extends Controller
             ]);
         }
         return redirect()->route('news.index');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\News  $news
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
-     */
-    public function show(News $news)
-    {
-        return view('new',
-            [
-                'title' => $news->header,
-                'user' => Auth::user(),
-                'date' => News::all(),
-                'modelName' => "News",
-                'news' => $news
-            ]
-        );
     }
 
     /**
