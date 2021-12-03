@@ -5,13 +5,14 @@ namespace App\Http\Controllers\AdminPanel;
 use App\Models\News;
 use App\Http\Controllers\Controller;
 use App\Traits\News\ShowNewsTrait;
+use App\Traits\News\WorkWithImgTrait;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
 class NewsController extends Controller
 {
-    use ShowNewsTrait;
+    use ShowNewsTrait, WorkWithImgTrait;
 
     /**
      * Display a listing of the resource.
@@ -59,8 +60,7 @@ class NewsController extends Controller
         $params = $request->all();
 
         if(isset($file)) {
-            $imgPath = $file->store('news_img');
-            $params['image'] = $imgPath;
+            $params = $this->resizeAndSave($file, $params);
             News::create([
                 'header' => $params['header'],
                 'body_text' => $params['text'],
@@ -110,8 +110,7 @@ class NewsController extends Controller
             if(isset($news->img_path)) {
                 Storage::delete($news->img_path);
             }
-            $imgPath = $file->store('news_img');
-            $params['image'] = $imgPath;
+            $params = $this->resizeAndSave($file, $params);
             $news->update([
                 'header' => $params['header'],
                 'body_text' => $params['text'],

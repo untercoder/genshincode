@@ -5,7 +5,16 @@
     .card-section {
         padding-top: 10px;
     }
+
+    .card-text {
+        color: grey;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        line-height: 16px;
+    }
 </style>
+
 <section class="header-new">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
@@ -20,8 +29,8 @@
     <div class="card" style="width: auto;">
         <div class="card-body">
             <h5 class="card-title">{{$new->header}}</h5>
-            <h6 class="card-subtitle mb-2 text-muted">{{$new->created_at}}</h6>
-            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <h6 class="card-subtitle mb-2 text-muted">Дата публикации: {{$new->created_at->format('d.m.y')}}</h6>
+            <p class="card-text">{{$new->body_text}}</p>
             <a href="{{route('gn-news.show', $new)}}" class="card-link">Прочитать</a>
         </div>
     </div>

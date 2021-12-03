@@ -33,6 +33,7 @@
                 @section('app_body')
                 <!-- Components app from view.component -->
                 @show
+                @include('components.footer')
             </div>
         </div>
     </div>
