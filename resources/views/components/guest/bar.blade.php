@@ -13,7 +13,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                         @if($user->hasRole('user'))
-                                <a class="dropdown-item" href="#">Мои обьявления</a>
+                                <a class="dropdown-item" href="{{route('accounts.index')}}">Мои обьявления</a>
                         @elseif($user->hasRole('admin'))
                                 <a class="dropdown-item" href="{{route('dashboard')}}">Панель управления</a>
                         @endif

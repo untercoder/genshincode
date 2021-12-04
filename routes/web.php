@@ -6,6 +6,7 @@ use App\Http\Controllers\AdminPanel\PromocodeController;
 use App\Http\Controllers\AdminPanel\UserController;
 use App\Http\Controllers\GuestAndUsers\ActualCodesController;
 use App\Http\Controllers\GuestAndUsers\GuestNewsController;
+use App\Http\Controllers\UserPanel\AccountController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+//guest
 Route::get('/' , [ActualCodesController::class, 'show']) -> name('actualCodes.show');
 Route::get('/about' , function () {return view('about', ['title' => "About", 'user' => Auth::user()]);})
     -> name('about.show');
@@ -30,6 +33,13 @@ Route::resource('news', GuestNewsController::class)->only([
     'show' => 'gn-news.show'
 ]);
 
+//user
+Route::prefix('myads')->middleware(['auth', 'role:user'])->group(function () {
+    Route::resource('accounts', AccountController::class);
+});
+
+
+//admin
 Route::prefix('dashboard')->middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('promocode', PromocodeController::class);
     Route::resource('users', UserController::class);
