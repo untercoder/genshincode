@@ -17,8 +17,9 @@ class Accounts extends Migration
             $table->id();
             $table->string("description");
             $table->string("user_email")->unique();
+            $table->string("server");
             $table->string("header");
-            $table->string("price");
+            $table->integer("price");
             $table->string("img");
             $table->string("contacts");
             $table->timestamps();
