@@ -15,7 +15,7 @@ class Accounts extends Migration
     {
         Schema::create('accounts', function (Blueprint $table) {
             $table->id();
-            $table->string("description");
+            $table->text("description");
             $table->string("user_email")->unique();
             $table->string("server");
             $table->string("header");
