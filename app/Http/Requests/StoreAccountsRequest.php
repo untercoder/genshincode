@@ -38,8 +38,8 @@ class StoreAccountsRequest extends FormRequest
     public function messages()
     {
         return [
-            'header.required' => "Краткое описаение обязательно для заполнения.",
-            'description.required' => "Полное описание обязательно для заполнения."
+            'header.required' => __('messages.header.required'),
+            'description.required' => __('messages.description.required')
         ];
     }
 }
