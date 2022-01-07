@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\UserPanel;
 
+use App\Http\Requests\StoreAccountsRequest;
 use App\Models\Account;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -47,7 +48,7 @@ class AccountController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreAccountsRequest $request)
     {
         dd($request->request);
     }
