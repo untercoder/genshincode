@@ -25,8 +25,14 @@ class StoreAccountsRequest extends FormRequest
     {
         return [
             '_token' => ['required'],
-            'header' => ['required', 'string', 'min:5', 'max:20'],
+            'header' => ['required', 'string', 'min:5', 'max:100'],
             'description' => ['required', 'string', 'min:10'],
+            'price' => ['required'],
+            'img' => ['required'],
+            'telegram' => ['required_without_all:whatsapp,email,phone'],
+            'whatsapp' => ['required_without_all:telegram,email,phone'],
+            'email' => ['required_without_all:whatsapp,telegram,phone'],
+            'phone' => ['required_without_all:whatsapp,email,telegram'],
         ];
     }
 
@@ -39,7 +45,18 @@ class StoreAccountsRequest extends FormRequest
     {
         return [
             'header.required' => __('messages.header.required'),
-            'description.required' => __('messages.description.required')
+            'header.string' => __('messages.header.string'),
+            'header.min' =>__('messages.header.min'),
+            'header.max' =>__('messages.header.max'),
+
+            'description.required' => __('messages.description.required'),
+            'description.string' => __('messages.description.string'),
+            'description.min' => __('messages.description.min'),
+
+            'price.required' => __('messages.price.required'),
+
+            'img.required' => __('messages.img.required')
+
         ];
     }
 }
