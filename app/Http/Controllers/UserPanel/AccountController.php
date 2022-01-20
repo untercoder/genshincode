@@ -119,9 +119,10 @@ class AccountController extends Controller
      * @param  \App\Models\Account  $account
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Account $account)
+    public function update(StoreAccountsRequest $request, Account $account)
     {
-        //
+        dd($request, $account);
+
     }
 
     /**
