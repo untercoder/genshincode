@@ -29,10 +29,10 @@ class StoreAccountsRequest extends FormRequest
             'description' => ['required', 'string', 'min:10'],
             'price' => ['required'],
             'img' => ['required'],
-            'telegram' => ['required_without_all:whatsapp,email,phone'],
-            'whatsapp' => ['required_without_all:telegram,email,phone'],
-            'email' => ['required_without_all:whatsapp,telegram,phone'],
-            'phone' => ['required_without_all:whatsapp,email,telegram'],
+            'telegram' => ['required_without_all:whatsapp,email,phone,useUserEmail'],
+            'email' => ['nullable','email','required_without_all:whatsapp,telegram,phone,useUserEmail'],
+            'phone' => ['required_without_all:whatsapp,email,telegram,useUserEmail'],
+            'useUserEmail' => ['required_without_all:whatsapp,email,telegram,phone']
         ];
     }
 
@@ -56,7 +56,6 @@ class StoreAccountsRequest extends FormRequest
             'price.required' => __('messages.price.required'),
 
             'img.required' => __('messages.img.required')
-
         ];
     }
 }

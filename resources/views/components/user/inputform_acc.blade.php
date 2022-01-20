@@ -16,7 +16,7 @@
         </div>
         @enderror
         <label for="exampleFormControlInput1">Краткое описание аккаунта</label>
-        <input type="text" name="header" value="{{old('header')}}"
+        <input type="text" name="header" value="{{old('header')}}@isset($account){{$account->header}}@endisset"
                class="form-control" id="exampleFormControlInput1">
     </div>
 
@@ -28,7 +28,7 @@
         @enderror
         <label for="exampleFormControlTextarea1">Полное описание</label>
         <textarea class ="form-control" name="description" id="exampleFormControlTextarea1"
-                  rows="3">{{old('description')}}</textarea>
+                  rows="3">{{old('description') }}@isset($account){{$account->description}}@endisset</textarea>
     </div>
 
     <div class="form-group">
@@ -64,11 +64,21 @@
         </div>
         @enderror
         <label for="exampleFormControlInput1">Цена - &#x20bd</label>
-        <input type="number" name="price" value="{{old('price')}}"
+        <input type="number" name="price" value="{{old('price')}}@isset($account){{$account->price}}@endisset"
                class="form-control" id="exampleFormControlInput1">
     </div>
 
     <div class="form-group">
+        @error('telegram')
+        <div class="alert alert-danger" role="alert">
+            <li>{{__('messages.contacts.required')}}</li>
+        </div>
+        @enderror
+        @error('email')
+        <div class="alert alert-danger" role="alert">
+            <li>{{__('messages.email.rule')}}</li>
+        </div>
+        @enderror
         <label for="contact">Введите данные для контакта с покупателем.</label>
         <div class="alert alert-warning" role="alert">
             >> Хотя бы одно поле должно быть заполнено.
@@ -77,17 +87,12 @@
         <div class="contact">
             <div>
                 <label for="telegramContact">Telegram:</label>
-                <input type="text" name="telegram" value="{{old('telegram')}}"
+                <input type="text" name="telegram" value="{{old('telegram')}}@isset($contacts){{$contacts['telegram']}}@endisset"
                        class="form-control " id="telegramContact">
             </div>
             <div class="contact-padding">
-                <label for="watsapContact">WhatSapp:</label>
-                <input type="text" name="whatsapp" value="{{old('whatsapp')}}"
-                       class="form-control " id="watsapContact">
-            </div>
-            <div class="contact-padding">
                 <label for="emailContact">Email:</label>
-                <input type="text" name="email" value="{{old('email')}}"
+                <input type="text" name="email" value="{{old('email')}}@isset($contacts){{$contacts['email']}}@endisset"
                        class="form-control " id="emailContact">
                 <div class="form-check mt-1">
                     <input class="form-check-input" name="useUserEmail" type="checkbox" value="true" id="flexCheckDefault">
@@ -99,7 +104,7 @@
 
             <div class="contact-padding">
                 <label for="phoneContact">Телефон:</label>
-                <input type="text" name="phone" value="{{old('phone')}}"
+                <input type="text" name="phone" value="{{old('phone')}}@isset($contacts){{$contacts['phone']}}@endisset"
                        class="form-control " id="phoneContact">
             </div>
 
@@ -109,13 +114,6 @@
         <button type="submit" class="btn btn-success ">Опубликовать обьявление</button>
     </div>
 
-    @if($errors->any())
-    <div class="alert alert-danger" role="alert">
-        @foreach($errors->all() as $error)
-            <li>{{$error}}</li>
-        @endforeach
-    </div>
-    @endif
 
 </form>
 

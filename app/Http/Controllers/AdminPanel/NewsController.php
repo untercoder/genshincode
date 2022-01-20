@@ -57,10 +57,11 @@ class NewsController extends Controller
     public function store(Request $request)
     {
         $file = $request->file('image');
+        $saveImgPath = "news_img/";
         $params = $request->all();
 
         if(isset($file)) {
-            $params = $this->resizeAndSave($file, $params);
+            $params['image'] = $this->resizeAndSave($file, $saveImgPath);
             News::create([
                 'header' => $params['header'],
                 'body_text' => $params['text'],
@@ -104,13 +105,14 @@ class NewsController extends Controller
     public function update(Request $request, News $news)
     {
         $file = $request->file('image');
+        $saveImgPath = "news_img/";
         $params = $request->all();
 
         if(isset($file)) {
             if(isset($news->img_path)) {
                 Storage::delete($news->img_path);
             }
-            $params = $this->resizeAndSave($file, $params);
+            $params['image'] = $this->resizeAndSave($file, $saveImgPath);
             $news->update([
                 'header' => $params['header'],
                 'body_text' => $params['text'],

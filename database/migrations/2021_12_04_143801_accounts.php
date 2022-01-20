@@ -17,11 +17,11 @@ class Accounts extends Migration
             $table->id();
             $table->integer("user_id");
             $table->text("description");
-            $table->string("user_email")->unique();
+            $table->string("user_email");
             $table->string("server");
             $table->string("header");
             $table->integer("price");
-            $table->string("img");
+            $table->string("img_path")->nullable();
             $table->string("contacts");
             $table->timestamps();
         });
