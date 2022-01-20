@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\UserPanel;
 
 
+use App\Http\Requests\StoreAccountsUpdateRequest;
 use App\Models\Account;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -117,12 +118,36 @@ class AccountController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Models\Account  $account
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(StoreAccountsRequest $request, Account $account)
+    public function update(StoreAccountsUpdateRequest $request, Account $account)
     {
-        dd($request, $account);
+        $file = $request->file('img');
+        $saveImgPath = "accounts_img/";
+        $user = Auth::user();
+        $ExistImgPath = $account->img_path;
 
+        $contacts = [
+            'telegram' => $request['telegram'],
+            'email' => isset($request['useUserEmail']) ? $user->email : $request['email'],
+            'phone' => $request['phone']
+        ];
+
+        if(isset($file)) {
+            Storage::delete($account->img_path);
+            $ExistImgPath = $this->resizeAndSave($file, $saveImgPath);
+        }
+
+        $account->update([
+            'description'=> $request['description'],
+            'server'=>$request['server'],
+            'header'=>$request['header'],
+            'price'=>$request['price'],
+            'img_path'=>$ExistImgPath,
+            'contacts'=>json_encode($contacts)
+        ]);
+
+        return redirect()->route('accounts.index');
     }
 
     /**
