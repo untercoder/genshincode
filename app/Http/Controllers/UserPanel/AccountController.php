@@ -16,6 +16,7 @@ class AccountController extends Controller
 {
 
     use WorkWithImgTrait;
+
     /**
      * Display a listing of the resource.
      *
@@ -54,7 +55,7 @@ class AccountController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(StoreAccountsRequest $request)
@@ -71,13 +72,13 @@ class AccountController extends Controller
 
         Account::create([
             'user_id' => $user->id,
-            'description'=> $request['description'],
-            'user_email'=>$user->email,
-            'server'=>$request['server'],
-            'header'=>$request['header'],
-            'price'=>$request['price'],
-            'img_path'=>$this->resizeAndSave($file, $saveImgPath),
-            'contacts'=>json_encode($contacts)
+            'description' => $request['description'],
+            'user_email' => $user->email,
+            'server' => $request['server'],
+            'header' => $request['header'],
+            'price' => $request['price'],
+            'img_path' => $this->resizeAndSave($file, $saveImgPath),
+            'contacts' => json_encode($contacts)
         ]);
 
         return redirect()->route('accounts.index');
@@ -86,7 +87,7 @@ class AccountController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Account  $account
+     * @param \App\Models\Account $account
      * @return \Illuminate\Http\Response
      */
     public function show(Account $account)
@@ -97,15 +98,17 @@ class AccountController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Account  $account
+     * @param \App\Models\Account $account
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function edit(Account $account)
     {
+        $user = Auth::user();
+        if($user->id !== $account->user_id){redirect()->route('accounts.index');}
         return view('user.user_create_ads_acc',
             [
                 'title' => "Actual codes",
-                'user' => Auth::user(),
+                'user' => $user,
                 'modelName' => 'Account',
                 'account' => $account,
                 'contacts' => json_decode($account->contacts, true)
@@ -116,15 +119,16 @@ class AccountController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Account  $account
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Account $account
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(StoreAccountsUpdateRequest $request, Account $account)
     {
+        $user = Auth::user();
+        if($user->id !== $account->user_id){redirect()->route('accounts.index');}
         $file = $request->file('img');
         $saveImgPath = "accounts_img/";
-        $user = Auth::user();
         $ExistImgPath = $account->img_path;
 
         $contacts = [
@@ -133,18 +137,18 @@ class AccountController extends Controller
             'phone' => $request['phone']
         ];
 
-        if(isset($file)) {
+        if (isset($file)) {
             Storage::delete($account->img_path);
             $ExistImgPath = $this->resizeAndSave($file, $saveImgPath);
         }
 
         $account->update([
-            'description'=> $request['description'],
-            'server'=>$request['server'],
-            'header'=>$request['header'],
-            'price'=>$request['price'],
-            'img_path'=>$ExistImgPath,
-            'contacts'=>json_encode($contacts)
+            'description' => $request['description'],
+            'server' => $request['server'],
+            'header' => $request['header'],
+            'price' => $request['price'],
+            'img_path' => $ExistImgPath,
+            'contacts' => json_encode($contacts)
         ]);
 
         return redirect()->route('accounts.index');
@@ -153,7 +157,7 @@ class AccountController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Account  $account
+     * @param \App\Models\Account $account
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Account $account)

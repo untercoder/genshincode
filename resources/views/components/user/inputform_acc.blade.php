@@ -2,10 +2,12 @@
     .padding-b {
         padding-bottom: 20px;
     }
-    .contact-padding{
+
+    .contact-padding {
         padding-top: 10px;
     }
-    .header_form{
+
+    .header_form {
         padding-top: 70px;
     }
 </style>
@@ -19,16 +21,17 @@
         @endif
     </h2>
     <hr>
-    <a href="{{route("accounts.index")}}" type="button" class="btn btn-primary"><i class="bi bi-arrow-left-circle"></i>{{__("inputform_acc.button.cancel")}}</a>
+    <a href="{{route("accounts.index")}}" type="button" class="btn btn-primary"><i
+            class="bi bi-arrow-left-circle"></i>{{__("inputform_acc.button.cancel")}}</a>
     <hr>
 </section>
 
 <form method="POST"
-        @if(isset($account))
-            action="{{route("accounts.update", $account)}}"
-        @else
-            action="{{route('accounts.store')}}"
-        @endif
+      @if(isset($account))
+      action="{{route("accounts.update", $account)}}"
+      @else
+      action="{{route('accounts.store')}}"
+      @endif
       enctype="multipart/form-data">
     @isset($account)@method("PUT")@endisset
     @csrf
@@ -39,8 +42,9 @@
         </div>
         @enderror
         <label for="exampleFormControlInput1">Краткое описание аккаунта</label>
-        <input type="text" name="header" @if(old('header') !== null) value="{{old('header')}}" @else value="@isset($account){{$account->header}}@endisset" @endif
-            class="form-control" id="exampleFormControlInput1">
+        <input type="text" name="header" @if(old('header') !== null) value="{{old('header')}}"
+               @else value="@isset($account){{$account->header}}@endisset" @endif
+               class="form-control" id="exampleFormControlInput1">
     </div>
 
     <div class="form-group">
@@ -51,9 +55,11 @@
         @enderror
         <label for="exampleFormControlTextarea1">Полное описание</label>
         @if(old('description') !== null)
-            <textarea class ="form-control" name="description" id="exampleFormControlTextarea1" rows="3">{{old('description')}}</textarea>
+            <textarea class="form-control" name="description" id="exampleFormControlTextarea1"
+                      rows="3">{{old('description')}}</textarea>
         @else
-            <textarea class ="form-control" name="description" id="exampleFormControlTextarea1" rows="3">@isset($account){{$account->description}}@endisset</textarea>
+            <textarea class="form-control" name="description" id="exampleFormControlTextarea1"
+                      rows="3">@isset($account){{$account->description}}@endisset</textarea>
         @endif
     </div>
 
@@ -90,7 +96,9 @@
         </div>
         @enderror
         <label for="exampleFormControlInput1">Цена - &#x20bd</label>
-        <input type="number" name="price" @if(old('price') !== null) value="{{old('price')}}"@else @isset($account)value="{{$account->price}}"@endisset @endif class="form-control" id="exampleFormControlInput1">
+        <input type="number" name="price" @if(old('price') !== null) value="{{old('price')}}"
+               @else @isset($account)value="{{$account->price}}" @endisset @endif class="form-control"
+               id="exampleFormControlInput1">
     </div>
 
     <div class="form-group">
@@ -112,15 +120,18 @@
         <div class="contact">
             <div>
                 <label for="telegramContact">Telegram:</label>
-                <input type="text" name="telegram" @if(old('telegram')!==null) value="{{old('telegram')}}"@else @isset($contacts) value="{{$contacts["telegram"]}}"@endisset @endif
+                <input type="text" name="telegram" @if(old('telegram')!==null) value="{{old('telegram')}}"
+                       @else @isset($contacts) value="{{$contacts["telegram"]}}" @endisset @endif
                        class="form-control " id="telegramContact">
             </div>
             <div class="contact-padding">
                 <label for="emailContact">Email:</label>
-                <input type="text" name="email" @if(old('email') !== null)value="{{old('email')}}" @else @isset($contacts)value="{{$contacts["email"]}}"@endisset @endif
+                <input type="text" name="email" @if(old('email') !== null)value="{{old('email')}}"
+                       @else @isset($contacts)value="{{$contacts["email"]}}" @endisset @endif
                        class="form-control" id="emailContact">
                 <div class="form-check mt-1">
-                    <input class="form-check-input" name="useUserEmail" type="checkbox" value="true" id="flexCheckDefault">
+                    <input class="form-check-input" name="useUserEmail" type="checkbox" value="true"
+                           id="flexCheckDefault">
                     <label class="form-check-label" for="flexCheckDefault">
                         Использовать Email указанный при регистрации.
                     </label>
@@ -129,7 +140,8 @@
 
             <div class="contact-padding">
                 <label for="phoneContact">Телефон:</label>
-                <input type="text" name="phone" @if(old('phone') !== null) value="{{old('phone')}}"@else @isset($contacts) value="{{$contacts["phone"]}}"@endisset @endif
+                <input type="text" name="phone" @if(old('phone') !== null) value="{{old('phone')}}"
+                       @else @isset($contacts) value="{{$contacts["phone"]}}" @endisset @endif
                        class="form-control " id="phoneContact">
             </div>
 
@@ -145,7 +157,5 @@
             @endif
         </button>
     </div>
-
-
 </form>
 

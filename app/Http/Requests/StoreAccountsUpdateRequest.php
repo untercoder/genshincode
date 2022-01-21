@@ -20,7 +20,7 @@ class StoreAccountsUpdateRequest extends StoreAccountsRequest
             'description' => ['required', 'string', 'min:10'],
             'price' => ['required'],
             'telegram' => ['required_without_all:whatsapp,email,phone,useUserEmail'],
-            'email' => ['nullable','email','required_without_all:whatsapp,telegram,phone,useUserEmail'],
+            'email' => ['nullable', 'email', 'required_without_all:whatsapp,telegram,phone,useUserEmail'],
             'phone' => ['required_without_all:whatsapp,email,telegram,useUserEmail'],
             'useUserEmail' => ['required_without_all:whatsapp,email,telegram,phone']
         ];

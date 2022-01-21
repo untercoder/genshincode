@@ -27,7 +27,7 @@ class NewsController extends Controller
                 'user' => Auth::user(),
                 'date' => News::all(),
                 'modelName' => "News",
-                'tableTh' => [ "Статья", "Дата создания" , "Последние обновление","Действия"]
+                'tableTh' => ["Статья", "Дата создания", "Последние обновление", "Действия"]
             ]
         );
     }
@@ -51,7 +51,7 @@ class NewsController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
@@ -60,15 +60,14 @@ class NewsController extends Controller
         $saveImgPath = "news_img/";
         $params = $request->all();
 
-        if(isset($file)) {
+        if (isset($file)) {
             $params['image'] = $this->resizeAndSave($file, $saveImgPath);
             News::create([
                 'header' => $params['header'],
                 'body_text' => $params['text'],
                 'img_path' => $params['image']
             ]);
-        }
-        else {
+        } else {
             News::create([
                 'header' => $params['header'],
                 'body_text' => $params['text'],
@@ -80,7 +79,7 @@ class NewsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\News  $news
+     * @param \App\Models\News $news
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function edit(News $news)
@@ -98,8 +97,8 @@ class NewsController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\News  $news
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\News $news
      * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, News $news)
@@ -108,8 +107,8 @@ class NewsController extends Controller
         $saveImgPath = "news_img/";
         $params = $request->all();
 
-        if(isset($file)) {
-            if(isset($news->img_path)) {
+        if (isset($file)) {
+            if (isset($news->img_path)) {
                 Storage::delete($news->img_path);
             }
             $params['image'] = $this->resizeAndSave($file, $saveImgPath);
@@ -118,8 +117,7 @@ class NewsController extends Controller
                 'body_text' => $params['text'],
                 'img_path' => $params['image']
             ]);
-        }
-        else {
+        } else {
             $news->update([
                 'header' => $params['header'],
                 'body_text' => $params['text'],
@@ -131,7 +129,7 @@ class NewsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\News  $news
+     * @param \App\Models\News $news
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(News $news)

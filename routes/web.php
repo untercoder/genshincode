@@ -23,9 +23,10 @@ use Illuminate\Support\Facades\Route;
 
 
 //guest
-Route::get('/' , [ActualCodesController::class, 'show']) -> name('actualCodes.show');
-Route::get('/about' , function () {return view('about', ['title' => "About", 'user' => Auth::user()]);})
-    -> name('about.show');
+Route::get('/', [ActualCodesController::class, 'show'])->name('actualCodes.show');
+Route::get('/about', function () {
+    return view('about', ['title' => "About", 'user' => Auth::user()]);
+})->name('about.show');
 Route::resource('news', GuestNewsController::class)->only([
     'index', 'show'
 ])->names([
@@ -51,4 +52,4 @@ Route::fallback(function () {
     return view('404');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
